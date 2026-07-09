@@ -16,6 +16,7 @@ plugs:
   tau-data:
     interface: mount
     workshop-target: /home/workshop/.tau
+    mode: 0o700
 
 parts:
   tau:
