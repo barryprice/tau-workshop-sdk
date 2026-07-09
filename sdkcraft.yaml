@@ -1,0 +1,29 @@
+name: tau
+adopt-info: tau
+summary: The Tau coding-agent SDK for Workshop
+description: |
+  This SDK provides the Tau AI coding agent for interactive terminal use
+  within a workshop. Session history, provider credentials, and user
+  configuration are persisted on the host across workshop updates.
+license: MIT
+build-base: ubuntu@24.04
+platforms:
+  amd64:
+    build-on: [amd64]
+    build-for: [amd64]
+
+plugs:
+  tau-data:
+    interface: mount
+    workshop-target: /home/workshop/.tau
+
+parts:
+  tau:
+    plugin: dump
+    source: .
+    source-type: local
+    override-pull: |
+      VERSION=$(cat "$CRAFT_PROJECT_DIR/VERSION")
+      craftctl set version="$VERSION"
+    prime:
+      - VERSION

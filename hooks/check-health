@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+set -e
+
+if ! sudo -u workshop --login tau --version >/dev/null 2>&1; then
+    workshopctl set-health error "tau not available on PATH"
+    exit 0
+fi
+workshopctl set-health okay
