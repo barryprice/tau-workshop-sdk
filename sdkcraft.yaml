@@ -25,5 +25,6 @@ parts:
     override-pull: |
       VERSION=$(cat "$CRAFT_PROJECT_DIR/VERSION")
       craftctl set version="$VERSION"
+      cp "$CRAFT_PROJECT_DIR/VERSION" "$CRAFT_PART_SRC/VERSION"
     prime:
       - VERSION
