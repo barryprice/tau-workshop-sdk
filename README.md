@@ -73,6 +73,7 @@ tau --version
 
 - Interface: `mount`
 - Workshop target: `/home/workshop/.tau`
+- Mode: `0o700`
 - Purpose: Persists session history (JSONL), provider credentials, and user
   configuration across workshop updates. Also holds the Python virtual
   environment used to run Tau.
