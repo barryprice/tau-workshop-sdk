@@ -3,7 +3,7 @@ set -e
 
 # Ensure python3-venv is available for setup-project
 apt-get update -q
-eatmydata apt-get install python3-venv
+eatmydata apt-get install python3-pip python3-venv
 
 # Add the venv (created by setup-project under the persisted tau-data mount)
 # to PATH for all login shells
