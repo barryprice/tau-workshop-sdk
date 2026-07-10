@@ -17,10 +17,9 @@ name: my-project
 base: ubuntu@26.04
 sdks:
   - name: tau
-    channel: latest/stable
+    channel: latest/edge
 actions:
-  tau:
-    tau
+  tau: tau
 ```
 
 This gives you the `tau` CLI on PATH inside the workshop. Run `tau` from your
