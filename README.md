@@ -14,14 +14,18 @@ A minimal workshop:
 ```yaml
 # workshop.yaml
 name: my-project
-base: ubuntu@24.04
+base: ubuntu@26.04
 sdks:
   - name: tau
     channel: latest/stable
+actions:
+  tau:
+    tau
 ```
 
 This gives you the `tau` CLI on PATH inside the workshop. Run `tau` from your
-project directory to start an interactive coding session.
+project directory to start an interactive coding session, or use the action by
+running `workshop run tau`.
 
 ---
 
