@@ -6,7 +6,6 @@ description: |
   within a workshop. Session history, provider credentials, and user
   configuration are persisted on the host across workshop updates.
 license: MIT
-build-base: ubuntu@26.04
 platforms:
   ubuntu@26.04:amd64:
   ubuntu@26.04:arm64:
