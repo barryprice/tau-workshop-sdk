@@ -6,11 +6,21 @@ description: |
   within a workshop. Session history, provider credentials, and user
   configuration are persisted on the host across workshop updates.
 license: MIT
+build-base: ubuntu@26.04
 platforms:
-  ubuntu@24.04:amd64:
-  ubuntu@24.04:arm64:
   ubuntu@26.04:amd64:
   ubuntu@26.04:arm64:
+    build-on: [ubuntu@26.04:amd64]
+    build-for: [ubuntu@26.04:arm64]
+  ubuntu@26.04:ppc64el:
+    build-on: [ubuntu@26.04:amd64]
+    build-for: [ubuntu@26.04:ppc64el]
+  ubuntu@26.04:s390x:
+    build-on: [ubuntu@26.04:amd64]
+    build-for: [ubuntu@26.04:s390x]
+  ubuntu@26.04:riscv64:
+    build-on: [ubuntu@26.04:amd64]
+    build-for: [ubuntu@26.04:riscv64]
 
 plugs:
   tau-data:
