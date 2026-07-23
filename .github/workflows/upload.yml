@@ -20,7 +20,7 @@ jobs:
   build-and-upload:
     uses: canonical/sdkcraft-actions/.github/workflows/upload.yml@99381343a0e743cd52c04057ea432fe2a7066859 # main
     with:
-      platforms: '["amd64","arm64","ppc64el","s390x","risc64"]'
+      platforms: '["amd64","arm64","ppc64el","s390x","riscv64"]'
       platform-flag: "--build-for"
       runs-on: '["ubuntu-latest"]'
     secrets:
