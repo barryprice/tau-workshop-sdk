@@ -19,7 +19,8 @@
   "packageRules": [
     {
       "matchPackageNames": ["tau-ai"],
-      "matchBaseBranches": ["latest"]
+      "matchBaseBranches": ["latest"],
+      "automerge": true
     }
   ]
 }
