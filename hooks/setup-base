@@ -1,12 +1,21 @@
 #!/usr/bin/bash
 set -e
 
-# Ensure python3-venv is available for setup-project
-apt-get update -q
-eatmydata apt-get install python3-pip python3-venv
+# Debian-patched pip may install to dist-packages instead of site-packages,
+# and the Python version string in the path varies by base. Discover the
+# actual directory rather than assuming a fixed name.
+PACKAGES_DIR=$(python3 -c "
+import glob
+dirs = sorted(glob.glob('$SDK/lib/python*/*-packages'))
+print(dirs[0] if dirs else '')
+")
 
-# Add the venv (created by setup-project under the persisted tau-data mount)
-# to PATH for all login shells
+if [ -z "$PACKAGES_DIR" ]; then
+    echo "ERROR: no Python packages directory found under $SDK/lib/" >&2
+    exit 1
+fi
+
 cat <<EOF >/etc/profile.d/tau.sh
-export PATH="/home/workshop/.tau/venv/bin:\$PATH"
+export PATH="$SDK/bin:\$PATH"
+export PYTHONPATH="${PACKAGES_DIR}\${PYTHONPATH:+:\$PYTHONPATH}"
 EOF
