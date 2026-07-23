@@ -10,29 +10,13 @@ platforms:
   ubuntu@24.04:amd64:
   ubuntu@26.04:amd64:
   ubuntu@24.04:arm64:
-    build-on: [ubuntu@24.04:amd64]
-    build-for: [ubuntu@24.04:arm64]
   ubuntu@26.04:arm64:
-    build-on: [ubuntu@26.04:amd64]
-    build-for: [ubuntu@26.04:arm64]
   ubuntu@24.04:ppc64el:
-    build-on: [ubuntu@24.04:amd64]
-    build-for: [ubuntu@24.04:ppc64el]
   ubuntu@26.04:ppc64el:
-    build-on: [ubuntu@26.04:amd64]
-    build-for: [ubuntu@26.04:ppc64el]
   ubuntu@24.04:s390x:
-    build-on: [ubuntu@24.04:amd64]
-    build-for: [ubuntu@24.04:s390x]
   ubuntu@26.04:s390x:
-    build-on: [ubuntu@26.04:amd64]
-    build-for: [ubuntu@26.04:s390x]
   ubuntu@24.04:riscv64:
-    build-on: [ubuntu@24.04:amd64]
-    build-for: [ubuntu@24.04:riscv64]
   ubuntu@26.04:riscv64:
-    build-on: [ubuntu@26.04:amd64]
-    build-for: [ubuntu@26.04:riscv64]
 
 plugs:
   tau-data:
@@ -42,12 +26,24 @@ plugs:
 
 parts:
   tau:
-    plugin: dump
-    source: .
-    source-type: local
+    plugin: nil
+    build-packages: [python3-pip]
     override-pull: |
       VERSION=$(cat "$CRAFT_PROJECT_DIR/VERSION")
       craftctl set version="$VERSION"
-      cp "$CRAFT_PROJECT_DIR/VERSION" "$CRAFT_PART_SRC/VERSION"
+    override-build: |
+      pip3 install "tau-ai==$(cat "$CRAFT_PROJECT_DIR/VERSION")" \
+        --prefix "$CRAFT_PART_INSTALL" \
+        --no-compile
+      # Debian/Ubuntu pip routes --prefix output through a local/ subdirectory
+      # (scripts → local/bin/, packages → local/lib/). Flatten it so the
+      # prime paths are where sdkcraft expects them.
+      if [ -d "$CRAFT_PART_INSTALL/local" ]; then
+        cp -a "$CRAFT_PART_INSTALL/local/." "$CRAFT_PART_INSTALL/"
+        rm -rf "$CRAFT_PART_INSTALL/local"
+      fi
+      install -m 644 "$CRAFT_PROJECT_DIR/VERSION" "$CRAFT_PART_INSTALL/VERSION"
     prime:
+      - bin/
+      - lib/
       - VERSION
