@@ -21,7 +21,8 @@
       "matchPackageNames": ["tau-ai"],
       "matchBaseBranches": ["latest"],
       "automerge": true,
-      "automergeType": "pr"
+      "automergeType": "pr",
+      "platformAutomerge": true
     }
   ]
 }
