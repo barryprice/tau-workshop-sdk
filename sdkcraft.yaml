@@ -34,7 +34,8 @@ parts:
     override-build: |
       pip3 install "tau-ai==$(cat "$CRAFT_PROJECT_DIR/VERSION")" \
         --prefix "$CRAFT_PART_INSTALL" \
-        --no-compile
+        --no-compile \
+        --ignore-installed
       # Debian/Ubuntu pip routes --prefix output through a local/ subdirectory
       # (scripts → local/bin/, packages → local/lib/). Flatten it so the
       # prime paths are where sdkcraft expects them.
