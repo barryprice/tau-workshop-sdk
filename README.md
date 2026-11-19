@@ -34,10 +34,9 @@ running `workshop run tau`.
 
 1. No prerequisite SDKs are required.
 2. No specific project layout is needed — run `tau` from any directory.
-3. On first launch, the SDK creates a Python virtual environment under
-   `~/.tau/venv` and installs `tau-ai`. Subsequent launches skip the install
-   if the version is already present. Provider credentials set via `/login`
-   inside Tau are stored in `~/.tau` and survive workshop updates.
+3. Tau ships inside the SDK at the version in `VERSION`, and `tau` is placed
+   on PATH at launch. Provider credentials set via `/login` inside Tau are
+   stored in `~/.tau` and survive workshop updates.
 
 ### Start a coding session
 
@@ -78,8 +77,7 @@ tau --version
 - Workshop target: `/home/workshop/.tau`
 - Mode: `0o700`
 - Purpose: Persists session history (JSONL), provider credentials, and user
-  configuration across workshop updates. Also holds the Python virtual
-  environment used to run Tau.
+  configuration across workshop updates.
 
 ---
 
