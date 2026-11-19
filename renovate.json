@@ -20,6 +20,7 @@
     {
       "matchPackageNames": ["tau-ai"],
       "matchBaseBranches": ["latest"],
+      "minimumReleaseAge": "3 days",
       "automerge": true,
       "automergeType": "pr",
       "platformAutomerge": true
