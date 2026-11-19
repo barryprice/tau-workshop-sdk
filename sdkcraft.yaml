@@ -43,8 +43,11 @@ parts:
         cp -a "$CRAFT_PART_INSTALL/local/." "$CRAFT_PART_INSTALL/"
         rm -rf "$CRAFT_PART_INSTALL/local"
       fi
+      # Find the bundled packages from inside the launcher instead of a global
+      # PYTHONPATH, which would leak into the user's own Python and venvs.
+      sed -i '1a import sys, os, glob; sys.path[:0] = glob.glob(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../lib/python*/*-packages"))' "$CRAFT_PART_INSTALL/bin/tau"
       install -m 644 "$CRAFT_PROJECT_DIR/VERSION" "$CRAFT_PART_INSTALL/VERSION"
     prime:
-      - bin/
+      - bin/tau
       - lib/
       - VERSION
