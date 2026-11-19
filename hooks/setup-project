@@ -1,7 +1,0 @@
-#!/usr/bin/bash
-set -e
-
-# Ensure ~/.tau exists for session history and provider credentials.
-# The tau-data mount plug connects the host-persisted directory here,
-# but on a fresh host the directory may not yet exist.
-mkdir -p "$HOME/.tau"
